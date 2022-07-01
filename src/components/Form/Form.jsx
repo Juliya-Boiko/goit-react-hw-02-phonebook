@@ -7,7 +7,7 @@ export class Form extends Component {
         number: '',
     }
 
-    reset = () => {
+    resetForm = () => {
       this.setState({
           name: '',
           number: '',
@@ -20,7 +20,7 @@ export class Form extends Component {
         })
     }
 
-    addContact = (evt) => {
+    hadlerSubmit = (evt) => {
         evt.preventDefault();
         const newName = {
             id: nanoid(),
@@ -28,11 +28,11 @@ export class Form extends Component {
             number: evt.target.elements.number.value,
         };
         this.props.onSubmit(newName);
-        this.reset();
+        this.resetForm();
     }
 
     render() {
-        return <form onSubmit={this.addContact}>
+        return <form onSubmit={this.hadlerSubmit}>
              <label>
                 Name:
                 <input

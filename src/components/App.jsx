@@ -13,7 +13,7 @@ export class App extends Component {
     filter: '',
   }
 
-  checkContact = (data) => {
+  validateContact = (data) => {
       const normalizedValue = data.name.toLowerCase();
       const result = this.state.contacts.find((item) => item.name.toLowerCase().includes(normalizedValue));
       return result;
@@ -34,8 +34,8 @@ export class App extends Component {
   }
 
   handlerSubmit = (data) => {
-    if (this.checkContact(data)) {
-      alert('alredy exist');
+    if (this.validateContact(data)) {
+      alert(`${data.name} already exist`);
     } else {
       this.setState((prevState) => {
         return {
@@ -56,7 +56,11 @@ export class App extends Component {
         onChange={this.handlerFilter}
         value={this.state.filter}
       />
-      <ContactsList value={this.state.filter} options={this.state.contacts} onClickDelete={this.deleteContact} />
+      <ContactsList
+        value={this.state.filter}
+        options={this.state.contacts}
+        onClickDelete={this.deleteContact}
+      />
     </>
   }
 }
