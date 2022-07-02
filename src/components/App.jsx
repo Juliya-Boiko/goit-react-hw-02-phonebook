@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Container, Title, Input } from './common/common.styled';
 import { MyForm } from './Form/Form';
 import { ContactsList } from './ContactsList/ContactsList';
 
@@ -46,11 +47,12 @@ export class App extends Component {
   }
 
   render() {
-    return <>
-      <h2>Contact App</h2>
+    return <Container>
+      <Title>Contact App</Title>
       <MyForm onSubmit={this.handlerSubmit} />
-      <h2>Search by name</h2>
-      <input
+      <Title>Search by name</Title>
+      <Input
+        placeholder="Type name..."
         type="text"
         name="name"
         onChange={this.handlerFilter}
@@ -61,6 +63,6 @@ export class App extends Component {
         options={this.state.contacts}
         onClickDelete={this.deleteContact}
       />
-    </>
+    </Container>
   }
 }

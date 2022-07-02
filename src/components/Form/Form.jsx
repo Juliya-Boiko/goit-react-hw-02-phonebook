@@ -1,6 +1,8 @@
 import { Component } from "react";
 import { nanoid } from 'nanoid';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
+import { ContactForm, Label, ContactField, PrimaryButton } from './Form.styled';
+import { TiContacts } from "react-icons/ti";
 import * as yup from 'yup';
 
 const mySchema = yup.object().shape({
@@ -41,29 +43,34 @@ export class MyForm extends Component {
             onSubmit={this.hadleSubmit}
             >
             {props => (
-                <Form>
-                    <label>
-                        Name:
-                        <Field
-                            type="text"
-                            name="name"
-                            onChange={props.handleChange}
-                            value={props.values.name}
-                        />
-                        <ErrorMessage name="name" />
-                    </label>
-                    <label>
-                        Number:
-                        <Field
-                            type="tel"
-                            name="number"
-                            onChange={props.handleChange}
-                            value={props.values.number}
-                        />
-                        <ErrorMessage name="number" />
-                    </label>
-                    <button type="submit">Add contact</button>
-                </Form>
+                <ContactForm>
+                    <div>
+                        <Label>
+                            Name:
+                            <ContactField
+                                type="text"
+                                name="name"
+                                onChange={props.handleChange}
+                                value={props.values.name}
+                            />
+                            <ErrorMessage name="name" />
+                        </Label>
+                        <Label>
+                            Number:
+                            <ContactField
+                                type="tel"
+                                name="number"
+                                onChange={props.handleChange}
+                                value={props.values.number}
+                            />
+                            <ErrorMessage name="number" />
+                        </Label>
+                    </div>
+                    <PrimaryButton type="submit">
+                        <TiContacts size={30}/>
+                        Add contact
+                    </PrimaryButton>
+                </ContactForm>
             )}
         </Formik>
     }
