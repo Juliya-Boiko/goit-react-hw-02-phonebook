@@ -1,7 +1,14 @@
 import { Component } from "react";
 import { nanoid } from 'nanoid';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as yup from 'yup';
 
-export class Form extends Component {
+const schema = yup.object().shape({
+  name: yup.string().length(3).required(),
+  number: yup.number().positive().integer().required(),
+});
+
+export class MyForm extends Component {
     state = {
         name: '',
         number: '',
@@ -20,7 +27,7 @@ export class Form extends Component {
         })
     }
 
-    hadlerSubmit = (evt) => {
+    hadleSubmit = (evt) => {
         evt.preventDefault();
         const newName = {
             id: nanoid(),
@@ -32,32 +39,39 @@ export class Form extends Component {
     }
 
     render() {
-        return <form onSubmit={this.hadlerSubmit}>
-             <label>
+        return <Formik
+            initialValues={this.state}
+            validationSchema={schema}
+            >
+            <Form onSubmit={this.hadleSubmit}>
+            <label>
                 Name:
-                <input
+                <Field
                     type="text"
                     name="name"
                     pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
                     title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-                        required
+                    // required
                     onChange={this.handlerInput}
                     value={this.state.name}
                     />
+                <ErrorMessage name="name" />
             </label>
             <label>
                 Number:
-                <input
+                <Field
                 type="tel"
                 name="number"
                 pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                 title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-                    required
+                // required
                 onChange={this.handlerInput}
                 value={this.state.number}
-                />
+                    />
+                <ErrorMessage name="number" />
             </label>
-        <button type="submit">Add contact</button>
-      </form>
+            <button type="submit">Add contact</button>
+            </Form>
+        </Formik>
     }
 }

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Form } from './Form/Form';
+import { MyForm } from './Form/Form';
 import { ContactsList } from './ContactsList/ContactsList';
 
 export class App extends Component {
@@ -48,7 +48,7 @@ export class App extends Component {
   render() {
     return <>
       <h2>Contact App</h2>
-      <Form onSubmit={this.handlerSubmit} />
+      <MyForm onSubmit={this.handlerSubmit} />
       <h2>Search by name</h2>
       <input
         type="text"
