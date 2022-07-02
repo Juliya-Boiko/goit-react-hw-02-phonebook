@@ -1,3 +1,4 @@
+import 'modern-normalize';
 import { Component } from "react";
 import { Container, Title, Input } from './common/common.styled';
 import { MyForm } from './Form/Form';

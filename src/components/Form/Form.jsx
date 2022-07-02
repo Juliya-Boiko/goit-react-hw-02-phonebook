@@ -1,8 +1,7 @@
 import { Component } from "react";
 import { nanoid } from 'nanoid';
 import { Formik, ErrorMessage } from 'formik';
-import { ContactForm, Label, ContactField, PrimaryButton } from './Form.styled';
-import { TiContacts } from "react-icons/ti";
+import { ContactForm, ContactLabel, ContactField, ErrorText, PrimaryButton, PrimaryButtonIcon } from './Form.styled';
 import * as yup from 'yup';
 
 const mySchema = yup.object().shape({
@@ -44,30 +43,28 @@ export class MyForm extends Component {
             >
             {props => (
                 <ContactForm>
-                    <div>
-                        <Label>
-                            Name:
-                            <ContactField
-                                type="text"
-                                name="name"
-                                onChange={props.handleChange}
-                                value={props.values.name}
-                            />
-                            <ErrorMessage name="name" />
-                        </Label>
-                        <Label>
-                            Number:
-                            <ContactField
-                                type="tel"
-                                name="number"
-                                onChange={props.handleChange}
-                                value={props.values.number}
-                            />
-                            <ErrorMessage name="number" />
-                        </Label>
-                    </div>
+                    <ContactLabel>
+                        Name:
+                        <ContactField
+                            type="text"
+                            name="name"
+                            onChange={props.handleChange}
+                            value={props.values.name}
+                        />
+                        <ErrorMessage name="name" render={msg => <ErrorText>{msg}</ErrorText>}/>
+                    </ContactLabel>
+                    <ContactLabel>
+                        Number:
+                        <ContactField
+                            type="tel"
+                            name="number"
+                            onChange={props.handleChange}
+                            value={props.values.number}
+                        />
+                        <ErrorMessage name="number" render={msg => <ErrorText>{msg}</ErrorText>}/>
+                    </ContactLabel>
                     <PrimaryButton type="submit">
-                        <TiContacts size={30}/>
+                        <PrimaryButtonIcon />
                         Add contact
                     </PrimaryButton>
                 </ContactForm>
