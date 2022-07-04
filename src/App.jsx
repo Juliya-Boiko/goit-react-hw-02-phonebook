@@ -1,8 +1,9 @@
 import 'modern-normalize';
 import { Component } from "react";
-import { Container, Title, Input } from './common/common.styled';
-import { MyForm } from './Form/Form';
-import { ContactsList } from './ContactsList/ContactsList';
+import { Container, Title } from './components/common/common.styled';
+import { MyForm } from './components/Form/Form';
+import { Filter } from './components/Filter/Filter';
+import { ContactsList } from './components/ContactsList/ContactsList';
 
 export class App extends Component {
   state = {
@@ -48,22 +49,16 @@ export class App extends Component {
   }
 
   render() {
-    return <Container>
-      <Title>Contact App</Title>
-      <MyForm onSubmit={this.handlerSubmit} />
-      <Title>Search by name</Title>
-      <Input
-        placeholder="Type name..."
-        type="text"
-        name="name"
-        onChange={this.handlerFilter}
-        value={this.state.filter}
-      />
-      <ContactsList
-        value={this.state.filter}
-        options={this.state.contacts}
-        onClickDelete={this.deleteContact}
-      />
-    </Container>
+    return  <Container>
+              <Title>Contact App</Title>
+                <MyForm onSubmit={this.handlerSubmit} />
+              <Title>Search by name</Title>
+                <Filter value={this.state.filter} onChange={this.handlerFilter} />
+                <ContactsList
+                value={this.state.filter}
+                options={this.state.contacts}
+                onClickDelete={this.deleteContact}
+              />
+            </Container>
   }
 }
